@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  # ----------------------------
+  # Set up our mysql database
+  mariadb:
+    image: mariadb:10.8
+    container_name: test-mariadb
+    restart: always
+    environment:
+      MARIADB_USER: employeedb
+      MARIADB_PASSWORD: employeedb
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: employeedb
+      MARIADB_PORT: 23306
+      MYSQL_TCP_PORT: 23306
+      MYSQL_UNIX_PORT: 23306
+    ports:
+      - "23306:23306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -P 23306 -u root --password=root
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql

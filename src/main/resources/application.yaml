@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: test
+  datasource:
+    url: jdbc:mariadb://localhost:23306/employeedb
+    username: employeedb
+    password: employeedb
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
